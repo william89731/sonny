@@ -22,3 +22,13 @@ App.bot.hears('🔐 Sicurezza IOT', ctx => {
         }, 300 * 1000)})
         .catch(err => console.log(err))                    
     });
+App.bot.action('npm', ctx => {
+    ctx.deleteMessage();
+    let chatId = ctx.chat.id;
+    let botReply = `<em>nella directory del tuo progetto, digita "npm audit"</em>` ;
+    ctx.telegram.sendMessage(chatId ,botReply,{ parse_mode: "html"}) 
+        .then((result) => { setTimeout(() => {
+            ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
+        }, 15 * 1000)})
+        .catch(err => console.log(err))
+})
