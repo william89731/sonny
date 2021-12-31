@@ -18,19 +18,7 @@ App.bot.start(async (ctx) => {
   return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )        
 }); 
 
-/*App.bot.hears(process.env.CODE, async (ctx) => {
-  ctx.deleteMessage();
-  return await ctx.reply(`ready`,App.Markup
-  .keyboard([ 
-      ['🤖 sonny','📜 regolamento', '🔍 cerca'],  
-      ['😎 matrix','⛅ meteo','🐈 gitHub' ], 
-      ['🏠 nodeRed','🏡 homeAssistant', '🏘️ openHab'],
-      ['🔐 Sicurezza IOT','🥷 admin'],  
-  ])
-  .oneTime()
-  .resize()
-)
-}) ; */
+
 //COMANDS USERS
 require('/bot/src/actions/tastiera');
 require('/bot/src/actions/sonny');
