@@ -31,7 +31,6 @@ App.bot.start(async (ctx) => {
   .resize()
 )
 }) ; */
-
 //COMANDS USERS
 require('/bot/src/actions/tastiera');
 require('/bot/src/actions/sonny');
