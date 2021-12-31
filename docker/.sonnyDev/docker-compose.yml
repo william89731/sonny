@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  
+  sonny:
+    container_name: sonnyTest
+    build: .
+    volumes:
+      - ./:/bot/
+    environment:
+      - "TZ=Europe/Rome"
+    deploy:           
+        restart_policy:
+            condition: unless-stopped
+        resources:
+            limits:
+                cpus: '0.50'
+                memory: 500M
