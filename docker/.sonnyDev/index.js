@@ -5,20 +5,6 @@ console.log("dir",__dirname);
 const App = require('/bot/src/settings/app'); 
 
 
-
-//const newMember = require('/home/william/docker/.sonnyTest/src/actions/newMember');
-
-//COMANDI ADMIN
-//const mute = require('/bot/src/commands/mute');
-//COMANDI UTENTI
-//const sicurezza = require('/bot/src/actions/sicurezza'); //gli altri tre comandi ok, questo no.. boh
-
-
-App.bot.start(async (ctx) => { 
-  return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )        
-}); 
-
-
 //COMANDS USERS
 require('/bot/src/actions/tastiera');
 require('/bot/src/actions/sonny');
@@ -41,8 +27,11 @@ require('/bot/src/commands/admin/unban');
 
 
 //ACTIONS CHAT
+require('/bot/src/actions/newEntry');
 require('/bot/src/actions/badwords');
-//require('/bot/src/actions/newMember');
+
+
+
 
 
 
