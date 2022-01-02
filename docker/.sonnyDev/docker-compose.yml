@@ -2,7 +2,7 @@ version: '3.8'
 services:
   
   sonny:
-    container_name: sonnyTest
+    container_name: sonnyDev
     build: .
     volumes:
       - ./:/bot/

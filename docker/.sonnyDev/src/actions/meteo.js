@@ -56,11 +56,11 @@ App.bot.telegram.sendMessage(
         .catch(err => console.log(err))
     });
 }
-App.bot.hears('⛅ meteo', ctx => {
+App.bot.hears('⛅meteo', ctx => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
-    let botReply = `digitare /meteo e il nome della città` ;
-    App.bot.telegram.sendMessage(chatId ,botReply) 
+    let botReply = `<em>digitare /meteo e il nome della città</em>` ;
+    App.bot.telegram.sendMessage(chatId ,botReply,{parse_mode: "HTML"}) 
         .then((result) => { setTimeout(() => {
             App.bot.telegram.deleteMessage(chatId, result.message_id)
         }, 10 * 1000)})

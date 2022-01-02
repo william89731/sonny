@@ -1,9 +1,9 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
-App.bot.hears('🔐 Sicurezza IOT', ctx => {
+App.bot.hears('🔐Sicurezza IOT', ctx => {
     ctx.deleteMessage(); 
     let chatId =ctx.chat.id; 
-    FromName = ctx.from.first_name,
+    let FromName = ctx.from.first_name;
     App.bot.telegram.sendMessage(chatId , `${FromName}, 👇`,
         {
             reply_markup:{

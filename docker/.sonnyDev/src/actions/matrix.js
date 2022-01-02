@@ -1,6 +1,6 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
-App.bot.hears('😎 matrix', ctx => {
+App.bot.hears('😎matrix', ctx => {
     console.log(ctx.from)
     let matrixMessage = ` ${ctx.from.first_name}, vuoi sapere cosa e' matrix? \n fai la tua scelta:`;
     ctx.deleteMessage();

@@ -1,9 +1,7 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
 const fs = require('fs');
-
-  //let rawbadwords = fs.readFileSync('/bot/src/settings/badwords.txt', 'utf8');
-const rawbadwords =  fs.readFileSync('/bot/src/settings/badwords.txt', 'utf8', (err, data) => {
+let rawbadwords =  fs.readFileSync('/bot/src/settings/badwords.txt', 'utf8', (err, data) => {
     if (err) throw err;
     console.log(data);
   }); 
@@ -17,7 +15,6 @@ App.bot.on('message', (msg) => {
              // bad word found!
              console.log( word, 'has been found in the message!');
              msg.deleteMessage();
-           //  bot.telegram.sendMessage(msg.chat.id,`❌`);
              App.bot.telegram.sendMessage(msg.chat.id,`${msg.from.first_name}, ⛔ \n<em>Hai usato un termine presente in blackList</em>`,{ parse_mode: "html"})
              break;
          }

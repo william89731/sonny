@@ -1,6 +1,6 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
-App.bot.hears('🥷 admin', ctx => {
+App.bot.hears('🥷admin', ctx => {
     ctx.deleteMessage();
     chatId = ctx.chat.id;
     chatType = ctx.chat.type;

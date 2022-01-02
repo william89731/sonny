@@ -3,7 +3,9 @@ require('dotenv').config({ path: '/bot/src/settings/.env' });
 const path = require('path'); 
 console.log("dir",__dirname);
 const App = require('/bot/src/settings/app'); 
-
+App.bot.start(async (ctx) => { 
+  return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )        
+}); 
 
 //COMANDS USERS
 require('/bot/src/actions/tastiera');
@@ -18,6 +20,7 @@ require('/bot/src/actions/regolamento');
 require('/bot/src/actions/matrix');
 require('/bot/src/actions/meteo');
 require('/bot/src/actions/admin');
+require('/bot/src/actions/allerte.js');
 
 //COMMANDS ADMIN
 require('/bot/src/commands/admin/mute');
