@@ -1,6 +1,4 @@
 const App = require('/bot/src/settings/app');
-//const Html = { parse_mode: "html"};
-//const ms = require('ms');
 const ms = require('ms');
 App.bot.hears('❗allerte', ctx => {
     ctx.deleteMessage();
@@ -22,15 +20,8 @@ App.bot.hears(`@admin`,  function(msg) {
     replyName = msg.message.reply_to_message.from.first_name;
     fromName = msg.from.first_name;
     testo = msg.update.message ;
-    time = testo.text.split(' ')[1];  
-    
-    
-    //if (msg.message.reply_to_message == undefined){
-    //    return;
-    //}
-    
      App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
-        if ((data.status == 'member') || (data.status == 'member')){
+        if ((data.status == 'member') ){
             App.bot.telegram.sendMessage(chatId,`${fromName}, segnalazione presa in carico`,{ parse_mode: "html"});    
             let admin1 = process.env.ID_ADMIN1; //william
             let admin2 = process.env.ID_ADMIN2;
@@ -63,3 +54,5 @@ App.bot.hears(`@admin`,  function(msg) {
    
 });
   
+  
+       
