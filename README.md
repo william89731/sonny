@@ -11,6 +11,6 @@ nodejs app dockerized. enjoy :-)
 
 # sonny
 
-![20220102_064637](https://user-images.githubusercontent.com/68069659/147867452-ed5d0bc1-9edb-4b79-a2b7-85f334b2cc2d.gif)
+![20220102_181539](https://user-images.githubusercontent.com/68069659/147883939-707e5d07-c2d9-4db5-b21a-9098ead3540a.gif)
 
 telegram Bot. in development. 
