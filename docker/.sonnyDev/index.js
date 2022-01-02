@@ -7,31 +7,33 @@ App.bot.start(async (ctx) => {
   return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )        
 }); 
 
+
+
 //COMANDS USERS
+require('/bot/src/users/sicurezzaIot');
+require('/bot/src/users/github');
+require('/bot/src/users/nodered');
+require('/bot/src/users/homeAssistant');
+require('/bot/src/users/openhab');
+require('/bot/src/users/search');
+require('/bot/src/users/regolamento');
+require('/bot/src/users/matrix');
+require('/bot/src/users/meteo');
+require('/bot/src/users/allerte.js');
+
+//ACTIONS CHAT
 require('/bot/src/actions/tastiera');
+require('/bot/src/actions/newEntry');
+require('/bot/src/actions/badwords');
 require('/bot/src/actions/sonny');
-require('/bot/src/actions/sicurezzaIot');
-require('/bot/src/actions/github');
-require('/bot/src/actions/nodered');
-require('/bot/src/actions/homeAssistant');
-require('/bot/src/actions/openhab');
-require('/bot/src/actions/search');
-require('/bot/src/actions/regolamento');
-require('/bot/src/actions/matrix');
-require('/bot/src/actions/meteo');
 require('/bot/src/actions/admin');
-require('/bot/src/actions/allerte.js');
+require('/bot/src/actions/user');
 
 //COMMANDS ADMIN
 require('/bot/src/commands/admin/mute');
 require('/bot/src/commands/admin/unmute');
 require('/bot/src/commands/admin/ban');
 require('/bot/src/commands/admin/unban');
-
-
-//ACTIONS CHAT
-require('/bot/src/actions/newEntry');
-require('/bot/src/actions/badwords');
 
 
 

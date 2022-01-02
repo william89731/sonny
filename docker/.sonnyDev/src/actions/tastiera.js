@@ -8,12 +8,14 @@ App.bot.hears(process.env.CODE, async (ctx) => {
     console.log("comando tastiera eseguito");
     return await ctx.reply(`ready`,App.Markup
     .keyboard([ 
-        ['🤖sonny','📜regolamento', '🔍cerca'],  
-        ['😎matrix','⛅meteo','🐈gitHub' ], 
-        ['🏠nodeRed','🏡homeAssistant', '🏘️openHab'],
-        ['🔐Sicurezza IOT','❗allerte','🥷admin'],  
+        ['🤖sonny', '🙎users','🥷admin'],
+    //    ['🤖sonny','📜regolamento', '🔍cerca','😎matrix'],  
+    //    ['⛅meteo','🐈gitHub','🏠nodeRed','🏡homeAssistant' ], 
+    //    ['🏘️openHab','🔐Sicurezza IOT','❗allerte','🥷admin'], 
+        
+        
     ])
-    .oneTime()
+  //  .oneTime()
     .resize()
 )
 }) ; 
