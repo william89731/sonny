@@ -1,13 +1,17 @@
 const App = require('/bot/src/settings/app');
 const ms = require('ms');
-App.bot.hears('❗allerte', ctx => {
+App.bot.action('allerte', async (ctx) => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
     let botReply = `${ctx.from.first_name},\nrispondi al messaggio che vuoi segnalare con @admin`;
-    ctx.telegram.sendMessage(chatId ,botReply,{ parse_mode: "html"})
+    return await ctx.reply( botReply,{ parse_mode: "html"})
         
         .then((result) => { setTimeout(() => {
-            App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
+            App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id,(err, data) => {
+                if (err) throw err;
+                console.log(data);
+              })
+               
         }, 10 * 1000)})
         .catch(err => console.log(err))         
 });

@@ -7,7 +7,11 @@ App.bot.start(async (ctx) => {
   return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )        
 }); 
 
-
+//ACTIONS CHAT
+require('/bot/src/actions/tastiera');
+require('/bot/src/actions/sonny');
+require('/bot/src/actions/admin');
+require('/bot/src/actions/user');
 
 //COMANDS USERS
 require('/bot/src/users/sicurezzaIot');
@@ -21,13 +25,7 @@ require('/bot/src/users/matrix');
 require('/bot/src/users/meteo');
 require('/bot/src/users/allerte.js');
 
-//ACTIONS CHAT
-require('/bot/src/actions/tastiera');
-require('/bot/src/actions/newEntry');
-require('/bot/src/actions/badwords');
-require('/bot/src/actions/sonny');
-require('/bot/src/actions/admin');
-require('/bot/src/actions/user');
+
 
 //COMMANDS ADMIN
 require('/bot/src/commands/admin/mute');
@@ -35,7 +33,9 @@ require('/bot/src/commands/admin/unmute');
 require('/bot/src/commands/admin/ban');
 require('/bot/src/commands/admin/unban');
 
-
+//RESTRICH
+require('/bot/src/actions/newEntry');
+require('/bot/src/actions/badwords');
 
 
 

@@ -38,13 +38,8 @@ App.bot.telegram.sendMessage(
         parse_mode: "HTML"
         }
     )
-            .then((result) => { setTimeout(() => {
-                App.bot.telegram.deleteMessage(chatId, result.message_id)
-            }, 300 * 1000)})
-            .catch(err => console.log(err))
+            
 
-    }, error => {
-    console.log("error", error);
     App.bot.telegram.sendMessage(
         chatId,
         `Ooops...la tua ricerca ha restituito un errore`, {
@@ -56,18 +51,48 @@ App.bot.telegram.sendMessage(
         .catch(err => console.log(err))
     });
 }
-App.bot.hears('⛅meteo', ctx => {
+App.bot.action('meteo', ctx => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
-    let botReply = `<em>digitare /meteo e il nome della città</em>` ;
-    App.bot.telegram.sendMessage(chatId ,botReply,{parse_mode: "HTML"}) 
-        .then((result) => { setTimeout(() => {
-            App.bot.telegram.deleteMessage(chatId, result.message_id)
-        }, 10 * 1000)})
-        .catch(err => console.log(err))
+    let botReply = `${ctx.from.first_name}, 👇 ` ;
+    App.bot.telegram.sendMessage(chatId ,botReply,
+        {
+            reply_markup:{
+                inline_keyboard:[
+                     [{text:"oggi", callback_data: `oggi`}],
+                     [{text:"domani", callback_data: `domani`}],
+                     
+                    
+                ]         
+            },
+        
+        })
+        
 })
 
-App.bot.command('meteo', msg => {    
+App.bot.action('oggi', ctx => {
+    ctx.deleteMessage();
+    let chatId = ctx.chat.id;
+    let botReply = `${ctx.from.first_name}, <em>digitare /oggi e il nome della città</em>`;
+    ctx.telegram.sendMessage(chatId ,botReply,{ parse_mode: "html"})
+        
+        .then((result) => { setTimeout(() => {
+            App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
+        }, 10 * 1000)})
+        .catch(err => console.log(err))         
+});
+App.bot.action('domani', ctx => {
+    ctx.deleteMessage();
+    let chatId = ctx.chat.id;
+    let botReply = `${ctx.from.first_name}, <em>funzione non disponibile</em>`;
+    ctx.telegram.sendMessage(chatId ,botReply,{ parse_mode: "html"})
+        
+        .then((result) => { setTimeout(() => {
+            App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
+        }, 10 * 1000)})
+        .catch(err => console.log(err))         
+});
+App.bot.command('oggi', msg => {    
     msg.deleteMessage();
     let chatId = msg.chat.id;
     let testo = msg.update.message ;
@@ -79,10 +104,11 @@ App.bot.command('meteo', msg => {
         `digitare nome città`)
     .then((result) => { setTimeout(() => {
         App.bot.telegram.deleteMessage(chatId, result.message_id)
-    }, 10 * 1000)})
+    }, 30 * 1000)})
     .catch(err => console.log(err))  
     return;
     }
     getWeather(chatId, city);    
-    });
-            
+});
+ 
+    

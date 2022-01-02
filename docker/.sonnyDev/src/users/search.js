@@ -1,6 +1,6 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
-App.bot.hears('🔍cerca', ctx => {
+App.bot.action('cerca', ctx => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
     let botReply = `${ctx.from.first_name},scegli il motore:`;                   
@@ -16,7 +16,10 @@ App.bot.hears('🔍cerca', ctx => {
             },
         
         })
-         
+        .then((result) => { setTimeout(() => {
+            ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
+        }, 20 * 1000)})
+        .catch(err => console.log(err))     
           
 });
 App.bot.action('duckduckgo', ctx => {
@@ -74,7 +77,7 @@ App.bot.command('duck', (ctx) => {
     })           
     .then((result) => { setTimeout(() => {
         ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-    }, 300 * 1000)})
+    }, 30 * 1000)})
     .catch(err => console.log(err))                   
 });
 App.bot.command('google', (ctx) => { 
@@ -92,7 +95,7 @@ App.bot.command('google', (ctx) => {
     })           
     .then((result) => { setTimeout(() => {
         ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-    }, 300 * 1000)})
+    }, 30 * 1000)})
     .catch(err => console.log(err))                   
 });
 App.bot.command('node', (ctx) => { 
@@ -110,7 +113,7 @@ App.bot.command('node', (ctx) => {
     })           
     .then((result) => { setTimeout(() => {
         ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-    }, 300 * 1000)})
+    }, 30 * 1000)})
     .catch(err => console.log(err))                   
 });
 App.bot.command('wiki', (ctx) => { 
@@ -128,6 +131,6 @@ App.bot.command('wiki', (ctx) => {
     })           
     .then((result) => { setTimeout(() => {
         ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-    }, 300 * 1000)})
+    }, 30 * 1000)})
     .catch(err => console.log(err))                   
 });

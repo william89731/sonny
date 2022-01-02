@@ -1,6 +1,6 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
-App.bot.hears('🏡homeAssistant', ctx => {
+App.bot.action('homeassistant', ctx => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
     let botReply = `${ctx.from.first_name}, 👇`;
@@ -18,6 +18,6 @@ App.bot.hears('🏡homeAssistant', ctx => {
         })
         .then((result) => { setTimeout(() => {
             App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 300 * 1000)})
+        }, 20 * 1000)})
         .catch(err => console.log(err))         
 });
