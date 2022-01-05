@@ -3,6 +3,9 @@ require('dotenv').config({ path: '/bot/src/settings/.env' });
 const path = require('path'); 
 console.log("dir",__dirname);
 const App = require('/bot/src/settings/app'); 
+const got = require('got');
+
+
 App.bot.start(async (ctx) => { 
   return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )        
 }); 
@@ -12,6 +15,7 @@ require('/bot/src/actions/tastiera');
 require('/bot/src/actions/sonny');
 require('/bot/src/actions/admin');
 require('/bot/src/actions/user');
+require('/bot/src/actions/AI');
 
 //COMANDS USERS
 require('/bot/src/users/sicurezzaIot');
@@ -24,6 +28,8 @@ require('/bot/src/users/regolamento');
 require('/bot/src/users/matrix');
 require('/bot/src/users/meteo');
 require('/bot/src/users/allerte.js');
+require('/bot/src/users/arduino.js');
+require('/bot/src/users/docker.js');
 
 
 
@@ -36,7 +42,6 @@ require('/bot/src/commands/admin/unban');
 //RESTRICH
 require('/bot/src/actions/newEntry');
 require('/bot/src/actions/badwords');
-
 
 
 

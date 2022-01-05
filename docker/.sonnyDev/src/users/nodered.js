@@ -1,10 +1,14 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
-App.bot.action('nodered', ctx => {
-    ctx.deleteMessage();
+//const sleep = require('sleep');
+
+
+App.bot.action('nodered',async ctx => {
+    ctx.deleteMessage();    
     let chatId = ctx.chat.id;
     let botReply = `${ctx.from.first_name}, 👇`;
-    ctx.telegram.sendMessage(chatId ,botReply,
+    ctx.telegram.sendMessage(chatId ,
+        botReply,
         {
             reply_markup:{
                 inline_keyboard:[
@@ -17,8 +21,12 @@ App.bot.action('nodered', ctx => {
             },
         
         })
-        .then((result) => { setTimeout(() => {
+    
+        
+        
+       .then((result) => { setTimeout(() => {
             App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
         }, 30 * 1000)})
-        .catch(err => console.log(err))         
+        .catch(err => console.log(err)) 
+       
 });

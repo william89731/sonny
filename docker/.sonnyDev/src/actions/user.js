@@ -8,16 +8,17 @@ App.bot.hears('🙎users', async (ctx) => {
         {
             reply_markup:{
                 inline_keyboard:[
-                               
-                    [{text:"🐈 GITHUB", callback_data: `github`}],
-                    [{text:"🏠 NODERED", callback_data: `nodered`}],
-                    [{text:"🏡 HOME-ASSISTANT", callback_data: `homeassistant`}],
-                    [{text:"🏘️ OPENHAB", callback_data: `openhab`}], 
-                    [{text:"🔍 CERCA", callback_data: `cerca`}],
+                    [{text:"📜 REGOLAMENTO", callback_data: `regolamento`},{text:"❗ SEGNALAZIONI", callback_data: `allerte`}],
+                  //  [{text:"❗ SEGNALAZIONI", callback_data: `allerte`}],
+                    [{text:"🔐 SICUREZZA IOT", callback_data: `sicurezzaIOT`},{text:"🐋 DOCKER", callback_data: `docker`}],
+                    [{text:"🐈 GITHUB", callback_data: `github`},{text:"🏠 NODERED", callback_data: `nodered`}],           
+                    [{text:"➖➕ ARDUINO", callback_data: `arduino`},{text:"🏡 HOME-ASSISTANT", callback_data: `homeassistant`}],       
+                    [{text:"🏘️ OPENHAB", callback_data: `openhab`},{text:"🔍 CERCA", callback_data: `cerca`}], 
                     [{text:"⛅ METEO", callback_data: `meteo`}],
-                    [{text:"🔐 SICUREZZA IOT", callback_data: `sicurezzaIOT`}],
-                    [{text:"❗ SEGNALAZIONI", callback_data: `allerte`}],
-                    [{text:"📜 REGOLAMENTO", callback_data: `regolamento`}],  
+
+                    
+                    
+                      
 
                                
                     

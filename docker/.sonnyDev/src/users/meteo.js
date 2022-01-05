@@ -11,7 +11,7 @@ const weatherIcon = (icon) => `http://openweathermap.org/img/w/${icon}.png`;
   
 const weatherHtmlTemplate = (name, main, weather, wind, clouds) => (
 
-    `👀: <b>${weather.description} a ${name}</b>\n🌡️: <b>${main.temp} °C</b>\n💧: <b>${main.humidity} %</b>`
+    `👀: <em>${weather.description} a ${name}</em>\n🌡️: ${main.temp} °C\n💧: ${main.humidity} %`
   );
 
 const getWeather = (chatId, city) => {
@@ -26,31 +26,32 @@ const getWeather = (chatId, city) => {
         clouds
     } = resp.data;
 
-//bot.telegram.sendPhoto(chatId, weatherIcon(weather[0].icon))
-//        .then((result) => { setTimeout(() => {
-//            bot.telegram.deleteMessage(chatId, result.message_id)
-//        }, 20 * 1000)})
-//        .catch(err => console.log(err))   
-
 App.bot.telegram.sendMessage(
         chatId,
         weatherHtmlTemplate(name, main, weather[0], wind, clouds), {
         parse_mode: "HTML"
         }
     )
-            
+            .then((result) => { setTimeout(() => {
+                App.bot.telegram.deleteMessage(chatId, result.message_id)
+            }, 30 * 1000)})
+            .catch(err => console.log(err))
 
+    }, error => {
+    console.log("error", error);
     App.bot.telegram.sendMessage(
         chatId,
-        `Ooops...la tua ricerca ha restituito un errore`, {
+        `<em>Ooops...la tua ricerca ha restituito un errore</em>`, {
         parse_mode: "HTML"
         })
         .then((result) => { setTimeout(() => {
-            bot.telegram.deleteMessage(chatId, result.message_id)
+            App.bot.telegram.deleteMessage(chatId, result.message_id)
         }, 10 * 1000)})
         .catch(err => console.log(err))
     });
 }
+
+
 App.bot.action('meteo', ctx => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
@@ -101,10 +102,10 @@ App.bot.command('oggi', msg => {
     if (city === undefined) {
     App.bot.telegram.sendMessage(
         chatId,
-        `digitare nome città`)
+        `${ctx.from.first_name},digitare nome città`)
     .then((result) => { setTimeout(() => {
         App.bot.telegram.deleteMessage(chatId, result.message_id)
-    }, 30 * 1000)})
+    }, 10 * 1000)})
     .catch(err => console.log(err))  
     return;
     }

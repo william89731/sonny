@@ -1,6 +1,6 @@
 //'use strict';
-const path = require('path'); 
-console.log("dir",__dirname);
+//const path = require('path'); 
+//console.log("dir",__dirname);
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
 const bot = new Telegraf( process.env.BOT_TOKEN );
 //const code = ( process.env.CODE );

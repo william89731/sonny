@@ -14,7 +14,7 @@ App.bot.on('message', (msg) => {
          if ( WORDS.indexOf(word) > -1 ) {
              // bad word found!
              console.log( word, 'has been found in the message!');
-             msg.deleteMessage();
+            // msg.deleteMessage();
              App.bot.telegram.sendMessage(msg.chat.id,`${msg.from.first_name}, ⛔ \n<em>Hai usato un termine presente in blackList</em>`,{ parse_mode: "html"})
              break;
          }
