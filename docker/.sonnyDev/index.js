@@ -1,13 +1,15 @@
 require('dotenv').config({ path: '/bot/src/settings/.env' });
 //const { Telegraf, Markup, keyboard ,extra  } = require('telegraf');
-const path = require('path'); 
-console.log("dir",__dirname);
+//const path = require('path'); 
+//console.log("dir",__dirname);
 const App = require('/bot/src/settings/app'); 
 const got = require('got');
+console.log(`container avviato`)  
 
 
 App.bot.start(async (ctx) => { 
-  return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )        
+  return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )
+  
 }); 
 
 //ACTIONS CHAT
@@ -30,6 +32,7 @@ require('/bot/src/users/meteo');
 require('/bot/src/users/allerte.js');
 require('/bot/src/users/arduino.js');
 require('/bot/src/users/docker.js');
+require('/bot/src/users/kubernetes.js');
 
 
 
@@ -38,9 +41,11 @@ require('/bot/src/commands/admin/mute');
 require('/bot/src/commands/admin/unmute');
 require('/bot/src/commands/admin/ban');
 require('/bot/src/commands/admin/unban');
+require('/bot/src/commands/test');
 
 //RESTRICH
 require('/bot/src/actions/newEntry');
+//require('/bot/src/actions/newMember');
 require('/bot/src/actions/badwords');
 
 

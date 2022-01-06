@@ -9,9 +9,9 @@ App.bot.hears('🤖sonny',  ctx => {
     let chatId = ctx.chat.id;
     let FromName = ctx.from.first_name;
        // let botReply2 = `_HEY,ciao_!  ${FromName} \n<em>Sono il tuo amichevole bot di quartiere</em> ☺️`;
-       App.bot.telegram.sendMessage(chatId,`<em>hey ciao</em> ${FromName} \n<em>Sono il tuo amichevole bot di quartiere</em> ☺️ \n<em>per continuare la conversazione, reply con il comando /s</em>`,{parse_mode: "html"}) 
+       App.bot.telegram.sendMessage(chatId,`<em>hey ciao</em> ${FromName} \n<em>Sono il tuo amichevole bot di quartiere</em> ☺️ \n<em>per avere una conversazione,usa il comando /s (+ testo)</em>`,{parse_mode: "html"}) 
             .then((result) => { setTimeout(() => {
                 App.bot.telegram.deleteMessage(chatId, result.message_id)
-            }, 120 * 1000)})
+            }, 30* 1000)})
             .catch(err => console.log(err))      
 });

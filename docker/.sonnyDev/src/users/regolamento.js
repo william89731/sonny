@@ -13,6 +13,6 @@ App.bot.action('regolamento', ctx => {
         })           
         .then((result) => { setTimeout(() => {
             ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 20 * 1000)})
+        }, 30 * 1000)})
         .catch(err => console.log(err))       
 });

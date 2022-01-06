@@ -20,16 +20,6 @@ App.bot.action('sicurezzaIOT',async ctx => {
         })
         .then((result) => { setTimeout(() => {
             ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 15 * 1000)})
+        }, 30 * 1000)})
         .catch(err => console.log(err))                  
     });
-/*App.bot.action('npm',async (ctx) => {
-    ctx.deleteMessage(); 
-    let chatId = ctx.chat.id;
-    let botReply = `<em>nella directory del tuo progetto, digita "npm audit"</em>` ;
-    return await ctx.reply(botReply,{ parse_mode: "html"}) 
-        .then((result) => { setTimeout(() => {
-            ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 15 * 1000)})
-        .catch(err => console.log(err))
-})*/

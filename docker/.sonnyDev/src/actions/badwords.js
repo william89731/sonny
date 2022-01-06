@@ -7,15 +7,16 @@ let rawbadwords =  fs.readFileSync('/bot/src/settings/badwords.txt', 'utf8', (er
   }); 
 const WORDS = rawbadwords.split('\n');  
 App.bot.on('message', (msg) => {
-  
-     let text = msg.update.message.text 
-     let words = text.toLowerCase().split(' ');
-     for ( let word of words) {
+    let text = msg.update.message.text;
+    let words = text.toLowerCase().trim().replace(/[".,\/#!$%\^&\*;:{}=\-_`~()]/g,"") ; 
+    let words2 = words.split(' ') ; 
+     console.log(`${words2}`);
+     for ( let word of words2) {
          if ( WORDS.indexOf(word) > -1 ) {
              // bad word found!
              console.log( word, 'has been found in the message!');
             // msg.deleteMessage();
-             App.bot.telegram.sendMessage(msg.chat.id,`${msg.from.first_name}, ⛔ \n<em>Hai usato un termine presente in blackList</em>`,{ parse_mode: "html"})
+             App.bot.telegram.sendMessage(msg.chat.id,`${msg.from.first_name}, ⛔ \n<em>Hai usato un termine presente in blackList.</em>\n<em>Cancella o modifica il messaggio</em>`,{ parse_mode: "html"})
              break;
          }
      }

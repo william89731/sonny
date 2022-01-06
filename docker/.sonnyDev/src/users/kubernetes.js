@@ -1,6 +1,6 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
-App.bot.action('arduino', ctx => {
+App.bot.action('kubernetes', ctx => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
     let botReply = `${ctx.from.first_name}, 👇`;
@@ -8,10 +8,9 @@ App.bot.action('arduino', ctx => {
         {
             reply_markup:{
                 inline_keyboard:[
-                    [{text:"arduino.cc", url:"https://www.arduino.cc/"}],
-                    
-                             
-                    
+                    [{text:"kubernetes.io", url:"https://kubernetes.io/it/"}],
+                    [{text:"microk8s.io", url:"https://microk8s.io/"}],
+                    [{text:"k3s.io", url:"https://k3s.io/"}],                 
                 ]         
             },
         

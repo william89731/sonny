@@ -4,28 +4,27 @@ const App = require('/bot/src/settings/app');
 const got = require('got');
 
 
-App.bot.command(`s`,  function(msg) {
-  //  msg.deleteMessage();
+App.bot.command('/s',  function(msg) {
+    //  msg.deleteMessage();
       console.log("comando @sonny ok");
-      chatId = msg.chat.id;
-      messageId = msg.message_id;
-      fromId = msg.from.id;
-      replyId = msg.message.reply_to_message.from.id;
-      replyName = msg.message.reply_to_message.from.first_name;
-      fromName = msg.from.first_name;
-      testo = msg.update.message ;
-      son = testo.text.split(' ')[1]; 
-     // let prompt = son;
-     const chatLog = 'Human: chi ti ha creato?\nAI: il team Microsoft, a Redmond.\nHuman: e quanti anni hai?\nAI: dieci anni.\n' 
+  let    chatId = msg.chat.id;
+  //   messageId = msg.message_id;
+  let    fromId = msg.from.id;
+  //   replyId = msg.message.reply_to_message.from.id;
+  //   replyName = msg.message.reply_to_message.from.first_name; */
+  let    fromName = msg.from.first_name;
+  let    testo = msg.update.message ;
+  let    son = testo.text.split(' '); 
+     const chatLog = 'Human: ciao,chi sei?\n\nAI: sono un giovane e amichevole assistente.\n' 
      // The new question asked by the user.
-     const question = son;
+     const question = testo;
      
      (async () => {
        const url = 'https://api.openai.com/v1/engines/davinci/completions';
        const prompt = `${chatLog}Human: ${question}`;
        const params = {
          'prompt': prompt,
-         'max_tokens': 150,
+         'max_tokens': 60,
          'temperature': 0.9,
          'frequency_penalty': 0,
          'presence_penalty': 0.6,
@@ -41,9 +40,10 @@ App.bot.command(`s`,  function(msg) {
          console.log(output);
          
         App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
-          if ((data.status == 'creator')){ setTimeout(() => {
+          if ((data.status == 'creator')){ 
+            
               App.bot.telegram.sendMessage(chatId, `${response.choices[0].text}`); 
-            }, 2 * 1000)
+            
           } else {
                App.bot.telegram.sendMessage(chatId,`${fromName}, <em>funzione prossimamente disponibile</em>`,{ parse_mode: "html"});
           }
