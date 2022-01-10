@@ -1,5 +1,6 @@
 const App = require('/bot/src/settings/app');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
+const ms = require('ms');
 App.bot.command(`ban`, function(msg, match){
     msg.deleteMessage();
     let chatId = msg.chat.id;

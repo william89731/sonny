@@ -1,23 +1,24 @@
-require('dotenv').config({ path: '/bot/src/settings/.env' });
-//const { Telegraf, Markup, keyboard ,extra  } = require('telegraf');
-//const path = require('path'); 
-//console.log("dir",__dirname);
-const App = require('/bot/src/settings/app'); 
-const got = require('got');
-console.log(`container avviato`)  
+require('dotenv').config({ path: '/bot/.env' });
+const express = require("express");
+const mysql = require("mysql2");
+const app = express();
+const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
+
+//database
+//require('/bot/src/settings/db_conf');
 
 
-App.bot.start(async (ctx) => { 
-  return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )
-  
-}); 
-
-//ACTIONS CHAT
+//ACTIONS 
+require('/bot/src/actions/start');
 require('/bot/src/actions/tastiera');
 require('/bot/src/actions/sonny');
 require('/bot/src/actions/admin');
 require('/bot/src/actions/user');
 require('/bot/src/actions/AI');
+//require('/bot/src/actions/db');
+
+
+
 
 //COMANDS USERS
 require('/bot/src/users/sicurezzaIot');
@@ -42,20 +43,10 @@ require('/bot/src/commands/admin/unmute');
 require('/bot/src/commands/admin/ban');
 require('/bot/src/commands/admin/unban');
 require('/bot/src/commands/test');
+require('/bot/src/commands/admin/strike');
+require('/bot/src/commands/admin/unstrike');
 
 //RESTRICH
 require('/bot/src/actions/newEntry');
 //require('/bot/src/actions/newMember');
 require('/bot/src/actions/badwords');
-
-
-
-App.bot.launch();
-process.once('SIGINT', () => App.bot.stop('SIGINT'))
-process.once('SIGTERM', () => App.bot.stop('SIGTERM'))
-
-
-
-
-
-

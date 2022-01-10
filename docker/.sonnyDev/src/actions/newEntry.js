@@ -5,14 +5,15 @@ App.bot.on('new_chat_members', (ctx) => {
     newMember = ctx.message.new_chat_members[0].id;
     newMemberName = ctx.message.new_chat_members[0].first_name;
     App.bot.telegram.restrictChatMember(ctx.chat.id, newMember);
-    App.bot.telegram.sendMessage(ctx.chat.id, `${newMemberName}, premi il pulsante entro 1 min  👇`,
+    App.bot.telegram.sendMessage(ctx.chat.id, `${newMemberName} 👇`,
     {
         reply_markup:{
             inline_keyboard:[
-                [{text:"✅", callback_data: `enter`}],                
+                [{text:"↘️CLICCAMI↙️", callback_data: `enter`}],                
             ]         
         },
     });
+    
     App.bot.action('enter',(ctx) => {
         ctx.deleteMessage();
         let chatId = ctx.chat.id;
@@ -27,7 +28,7 @@ App.bot.on('new_chat_members', (ctx) => {
         );
         
         
-        ctx.reply(`👇👇👇👇👇👇👇👇`,
+        ctx.reply(`👇👇`,
             {
                 reply_markup:{
                     inline_keyboard:[
@@ -37,5 +38,5 @@ App.bot.on('new_chat_members', (ctx) => {
             })              
         });
 
-
+    
 });

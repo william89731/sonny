@@ -1,13 +1,40 @@
 version: '3.8'
 services:
-  
+  mysql:
+    container_name: mysql
+    build: ./database
+    env_file: ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      TZ: Europe/Rome
+    volumes:
+      - ./database/db:/var/lib/mysql
+    deploy:           
+        restart_policy:
+            condition: unless-stopped
+        resources:
+            limits:
+                cpus: '0.50'
+                memory: 500M
+    
   sonny:
     container_name: sonnyDev
     build: .
     volumes:
       - ./:/bot/
+    env_file: ./.env
     environment:
-      - "TZ=Europe/Rome"
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_HOST: mysql
+      TZ: Europe/Rome
+  
+    ports:
+       - "5001:5000"
+    depends_on:
+      - mysql  
     deploy:           
         restart_policy:
             condition: unless-stopped
