@@ -15,6 +15,8 @@ App.bot.action('github', ctx => {
                     [{text:"House-alarm-with-gateway-xiaomi", url:"https://github.com/william89731/House-alarm-with-gateway-xiaomi"}],
                     [{text:"DS18B20 in node-red", url:"https://github.com/M4M0M3N/DS18B20_node-red"}],
                     [{text:"Wemos d1 mini led rgb", url:"https://github.com/M4M0M3N/ps3_led"}],
+                    [{text:"nik-servo", url:"https://github.com/nikisalli/nik-servo"}],
+
                                
                     
                 ]         

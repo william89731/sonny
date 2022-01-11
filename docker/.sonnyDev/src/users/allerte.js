@@ -1,4 +1,5 @@
 const App = require('/bot/src/settings/app');
+const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
 const ms = require('ms');
 App.bot.action('allerte', async (ctx) => {
     ctx.deleteMessage();
@@ -18,6 +19,7 @@ App.bot.action('allerte', async (ctx) => {
 App.bot.hears(`@admin`,  function(msg) {
     console.log("comando admin eseguito");
     chatId = msg.chat.id;
+    chatUsername = msg.chat.username ;
     messageId = msg.message_id;
     fromId = msg.from.id;
     replyId = msg.message.reply_to_message.from.id;
@@ -26,12 +28,31 @@ App.bot.hears(`@admin`,  function(msg) {
     testo = msg.update.message ;
      App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
         if ((data.status == 'member') ){
-            App.bot.telegram.sendMessage(chatId,`${fromName}, segnalazione presa in carico`,{ parse_mode: "html"});    
+            App.bot.telegram.sendMessage(chatId,`${fromName}, <em>segnalazione presa in carico</em>`,{ parse_mode: "html"});    
             let admin1 = process.env.ID_ADMIN1; //william
             let admin2 = process.env.ID_ADMIN2;
             let gruppo = process.env.NICK_GROUP;
             let messageId = msg.message.reply_to_message.from.id ;
-            link = `t.me/${gruppo}/${messageId}`;
+            link = `t.me/${chatUsername}/${messageId}`;
+            App.bot.telegram.getChatAdministrators(chatId).then((administrators) => {
+
+                for (let i = 0; i < administrators.length; i++) {
+                  if (administrators[i].user.is_bot == false) {
+                    App.bot.telegram.sendMessage(administrators[i].user.id, `❗`,
+                    {
+                        reply_markup:{
+                            inline_keyboard:[    
+                                [{text:"segnalazione", url: link}]
+                        ]            
+                        },   
+                    })
+                  }
+                  
+                }
+                
+              })
+    
+         /*   link = `t.me/${gruppo}/${messageId}`;
             App.bot.telegram.sendMessage(admin1,`❗`,
             {
                 reply_markup:{
@@ -40,8 +61,8 @@ App.bot.hears(`@admin`,  function(msg) {
                         [{text:"segnalazione", url: link}],
                 ]            
                 },   
-            });
-            App.bot.telegram.sendMessage(admin2,`❗`,
+            });*/
+        /*    App.bot.telegram.sendMessage(admin2,`❗`,
             {
                 reply_markup:{
                     inline_keyboard:[
@@ -49,7 +70,7 @@ App.bot.hears(`@admin`,  function(msg) {
                         [{text:"segnalazione", url: link}],
                 ]            
                 },   
-            });
+            }); */
 
         } else {
              App.bot.telegram.sendMessage(chatId,`${fromName}, questo comando e' ad uso esclusivo dei membri`);

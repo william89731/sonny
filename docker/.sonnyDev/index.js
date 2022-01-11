@@ -1,11 +1,8 @@
-require('dotenv').config({ path: '/bot/.env' });
+//require('dotenv').config({ path: '/bot/.env' });
 const express = require("express");
-const mysql = require("mysql2");
+//const mysql = require("mysql2");
 const app = express();
-const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
-
-//database
-//require('/bot/src/settings/db_conf');
+//const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
 
 
 //ACTIONS 
@@ -15,7 +12,6 @@ require('/bot/src/actions/sonny');
 require('/bot/src/actions/admin');
 require('/bot/src/actions/user');
 require('/bot/src/actions/AI');
-//require('/bot/src/actions/db');
 
 
 
@@ -34,6 +30,7 @@ require('/bot/src/users/allerte.js');
 require('/bot/src/users/arduino.js');
 require('/bot/src/users/docker.js');
 require('/bot/src/users/kubernetes.js');
+require('/bot/src/users/channels.js');
 
 
 
@@ -42,7 +39,6 @@ require('/bot/src/commands/admin/mute');
 require('/bot/src/commands/admin/unmute');
 require('/bot/src/commands/admin/ban');
 require('/bot/src/commands/admin/unban');
-require('/bot/src/commands/test');
 require('/bot/src/commands/admin/strike');
 require('/bot/src/commands/admin/unstrike');
 
@@ -50,3 +46,5 @@ require('/bot/src/commands/admin/unstrike');
 require('/bot/src/actions/newEntry');
 //require('/bot/src/actions/newMember');
 require('/bot/src/actions/badwords');
+
+app.listen(5000, () => console.log("listining on port 5000")); 

@@ -5,9 +5,17 @@ App.bot.hears('🥷admin', ctx => {
     chatId = ctx.chat.id;
     chatType = ctx.chat.type;
     fromName = ctx.from.first_name;
-    comandi = "<em>questi sono i comandi per  il bot</em>: \n<em>/mute 2 (esempio 2 min di mute per l'utente)</em> \n<em>/unmute (toglie il mute)</em> \n<em>/ban (kick utente)</em> \n<em>/unban (toglie il kick )</em>" ;
+   // comandi = "<em>questi sono i comandi ad uso esclusivo degli admin</em>: \n<em>/mute 2 (esempio 2 min di mute per l'utente)</em> \n<em>/unmute (toglie il mute)</em> \n<em>/ban (kick utente)</em> \n<em>/unban (toglie il kick )</em>" ;
     if (chatType == 'private'){
-        App.bot.telegram.sendMessage(chatId, comandi,{ parse_mode: "html"})
+        App.bot.telegram.sendMessage(chatId,`
+        <em>questi sono i comandi ad uso esclusivo degli admin</em>: 
+        \n<em>/mute 2 (esempio 2 min di mute)</em> 
+        \n<em>/unmute (toglie il mute)</em> 
+        \n<em>/ban (ban per 7 giorni)</em> 
+        \n<em>/unban (toglie il ban)</em>
+        \n<em>/strike (ammonizione)</em>
+        \n<em>/unstrike ( toglie ammonizione)</em>
+        ` ,{ parse_mode: "html"})
     }
     else if (chatType == 'supergroup'){
         App.bot.telegram.sendMessage(chatId, `${fromName}\n<em>questo comando non e' attivato in chat pubblica</em>`,{ parse_mode: "html"})
