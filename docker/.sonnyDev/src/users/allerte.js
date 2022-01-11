@@ -51,27 +51,6 @@ App.bot.hears(`@admin`,  function(msg) {
                 }
                 
               })
-    
-         /*   link = `t.me/${gruppo}/${messageId}`;
-            App.bot.telegram.sendMessage(admin1,`❗`,
-            {
-                reply_markup:{
-                    inline_keyboard:[
-                        
-                        [{text:"segnalazione", url: link}],
-                ]            
-                },   
-            });*/
-        /*    App.bot.telegram.sendMessage(admin2,`❗`,
-            {
-                reply_markup:{
-                    inline_keyboard:[
-                        
-                        [{text:"segnalazione", url: link}],
-                ]            
-                },   
-            }); */
-
         } else {
              App.bot.telegram.sendMessage(chatId,`${fromName}, questo comando e' ad uso esclusivo dei membri`);
         }
