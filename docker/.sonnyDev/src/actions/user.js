@@ -14,7 +14,7 @@ App.bot.hears('🙎users', async (ctx) => {
                     [{text:"🏠 NODERED", callback_data: `nodered`},{text:"➖➕ ARDUINO", callback_data: `arduino`}],
                     [{text:"🏡 HOME-ASSISTANT", callback_data: `homeassistant`},{text:"🏘️ OPENHAB", callback_data: `openhab`}],
                     [{text:"🛋️ CANALI TELEGRAM", callback_data: `canali`},{text:"🔍 CERCA", callback_data: `cerca`}], 
-                    [{text:"⛅ METEO", callback_data: `meteo`}],
+                    [{text:"⛅ METEO", callback_data: `meteo`},{text:"🤹 FUN", callback_data: `fun`}],
                     
 
                 /*    [{text:"🐈 GITHUB", callback_data: `github`},{text:"🏠 NODERED", callback_data: `nodered`}],           

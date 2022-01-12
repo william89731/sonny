@@ -7,5 +7,6 @@ FROM node:16.4-alpine3.14 as final
 USER node:node
 WORKDIR /bot
 EXPOSE 5000
-#CMD npm start
-CMD ["node", "index.js"]
+CMD npm start
+
+

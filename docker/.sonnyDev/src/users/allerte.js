@@ -3,7 +3,7 @@ const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
 const ms = require('ms');
 App.bot.action('allerte', async (ctx) => {
     ctx.deleteMessage();
-    let chatId = ctx.chat.id;
+  //  let chatId = ctx.chat.id;
     let botReply = `${ctx.from.first_name},\nrispondi al messaggio che vuoi segnalare con @admin`;
     return await ctx.reply( botReply,{ parse_mode: "html"})
         
@@ -29,9 +29,9 @@ App.bot.hears(`@admin`,  function(msg) {
      App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
         if ((data.status == 'member') ){
             App.bot.telegram.sendMessage(chatId,`${fromName}, <em>segnalazione presa in carico</em>`,{ parse_mode: "html"});    
-            let admin1 = process.env.ID_ADMIN1; //william
-            let admin2 = process.env.ID_ADMIN2;
-            let gruppo = process.env.NICK_GROUP;
+         //   let admin1 = process.env.ID_ADMIN1; //william
+         //   let admin2 = process.env.ID_ADMIN2;
+         //   let gruppo = process.env.NICK_GROUP;
             let messageId = msg.message.reply_to_message.from.id ;
             link = `t.me/${chatUsername}/${messageId}`;
             App.bot.telegram.getChatAdministrators(chatId).then((administrators) => {
