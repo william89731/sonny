@@ -31,7 +31,7 @@ require('/bot/src/users/arduino.js');
 require('/bot/src/users/docker.js');
 require('/bot/src/users/kubernetes.js');
 require('/bot/src/users/channels.js');
-require('/bot/src/users/fun.js');
+//require('/bot/src/users/fun.js');
 
 
 
@@ -43,10 +43,14 @@ require('/bot/src/commands/admin/ban');
 require('/bot/src/commands/admin/unban');
 require('/bot/src/commands/admin/strike');
 require('/bot/src/commands/admin/unstrike');
+//require('/bot/src/commands/admin/getchat');
 
-//RESTRICH
+
+//RESTRICT
 require('/bot/src/actions/newEntry');
 //require('/bot/src/actions/newMember');
 require('/bot/src/actions/badwords');
 
+  
+//  console.log("leaving try-catch statement");
 app.listen(5000, () => console.log("listining on port 5000")); 

@@ -15,6 +15,11 @@ App.bot.command(`strike`,  function(msg) {
   replyName = msg.message.reply_to_message.from.first_name;
   fromName = msg.from.first_name;
   testo = msg.update.message ;
+  if (msg.message.reply_to_message.from.username !== undefined) {
+    userAlias = `@${msg.message.reply_to_message.from.username}`;
+} else {
+    userAlias = `${msg.message.reply_to_message.from.id}`;
+} 
   App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
     if ((data.status == 'creator') || (data.status == 'administrator')){
         console.log(`l'utente e' un ${data.status}` );
@@ -41,7 +46,7 @@ App.bot.command(`strike`,  function(msg) {
               con.query(`SELECT strike FROM membri WHERE  user_id='${replyId}'`, function(err,result) {
                 if (err) throw err;
                 console.log(`${result[0].strike}`);
-                msg.reply(`❌ ⚾ \n${replyName}, <em>hai commesso una infrazione!</em> \n ${result[0].strike}/3 <em>strike</em> `,{ parse_mode: "html"});
+                msg.reply(`❌ ⚾ \n${userAlias}, <em>hai commesso una infrazione!</em> \n ${result[0].strike}/3 <em>strike</em> `,{ parse_mode: "html"});
               }); 
 
             }
@@ -61,7 +66,7 @@ App.bot.command(`strike`,  function(msg) {
                   noperms.can_send_other_messages = false;
                   noperms.can_can_add_web_page_previews = false;
                   App.bot.telegram.restrictChatMember(chatId, replyId, {until_date: Math.round((Date.now() + ms(1 + 'm'))/1000) }, noperms).then(function(result){
-                    msg.reply(`❌ ⚾ \n${replyName}, <em>Sei arrivato al terzo strike!</em> \n<em>Sei stato mutato per 1 min 🤐</em> `,{ parse_mode: "html"});
+                    msg.reply(`❌ ⚾ \n${userAlias}, <em>Sei arrivato al terzo strike!</em> \n<em>Sei stato mutato per 1 min 🤐</em> `,{ parse_mode: "html"});
                    // App.bot.deleteMessage(chat.id, messageId);
                 }) // restrictChatMember
                 con.query(`DELETE FROM membri  WHERE  user_id = ${replyId}`, function(err,result) {
@@ -70,7 +75,7 @@ App.bot.command(`strike`,  function(msg) {
                   });   
                 }
                 else{
-                  msg.reply(`❌ ⚾ \n${replyName}, <em>hai commesso una infrazione!</em> \n ${result[0].strike}/3 <em>strike</em> `,{ parse_mode: "html"});  
+                  msg.reply(`❌ ⚾ \n${userAlias}, <em>hai commesso una infrazione!</em> \n ${result[0].strike}/3 <em>strike</em> `,{ parse_mode: "html"});  
                 }  
               });  
             }

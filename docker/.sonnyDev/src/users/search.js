@@ -63,29 +63,38 @@ App.bot.action('wiki', ctx => {
         .catch(err => console.log(err))
 });
 App.bot.command('duck', (ctx) => { 
-    ctx.deleteMessage()        
+ //   ctx.deleteMessage()        
     let chatId = ctx.chat.id;
+  //  let replyId = ctx.message.reply_to_message.from.id;
+   // let replyMessage = ctx.reply_to_message_id;
+   // let messageId = ctx.message_id;
+    //testo =  `messaggio prova`;
+    reply =  ctx.from.id ;
     let cerca = ctx.update.message.text.split(' ')[1];
     let link = `https://duckduckgo.com/?q=${cerca}`
-    ctx.telegram.sendMessage(chatId,`${ctx.from.first_name}, 👇`,
+    ctx.telegram.sendMessage(chatId,`ecco la tua ricerca:`,
+    //ctx.reply(`test`);   
+        
      {
         reply_markup:{
             inline_keyboard:[
                 [{text:"duckduckgo", url: link}],            
          ]            
         },   
-    })           
+     })           
     .then((result) => { setTimeout(() => {
         ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-    }, 30 * 1000)})
+    }, 60 * 1000)})
     .catch(err => console.log(err))                   
 });
 App.bot.command('google', (ctx) => { 
     ctx.deleteMessage()        
     let chatId = ctx.chat.id;
     let cerca = ctx.update.message.text.split(' ')[1];
-    let link2 = `https://google.it/search?q=${cerca}`
-    ctx.telegram.sendMessage(chatId,`${ctx.from.first_name}, 👇`,
+    let link2 = `https://google.it/search?q=${cerca}`;
+    //chatUsername = ctx.chat.username
+    //user = `t.me/${chatUsername}/${ctx.from.name}`
+    ctx.telegram.sendMessage(chatId,`ecco la tua ricerca:`,
      {
         reply_markup:{
             inline_keyboard:[
@@ -95,7 +104,7 @@ App.bot.command('google', (ctx) => {
     })           
     .then((result) => { setTimeout(() => {
         ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-    }, 30 * 1000)})
+    }, 60 * 1000)})
     .catch(err => console.log(err))                   
 });
 App.bot.command('node', (ctx) => { 
@@ -113,7 +122,7 @@ App.bot.command('node', (ctx) => {
     })           
     .then((result) => { setTimeout(() => {
         ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-    }, 30 * 1000)})
+    }, 60 * 1000)})
     .catch(err => console.log(err))                   
 });
 App.bot.command('wiki', (ctx) => { 
@@ -131,6 +140,6 @@ App.bot.command('wiki', (ctx) => {
     })           
     .then((result) => { setTimeout(() => {
         ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-    }, 30 * 1000)})
+    }, 60 * 1000)})
     .catch(err => console.log(err))                   
 });

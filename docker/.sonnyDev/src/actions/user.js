@@ -3,8 +3,13 @@ const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
 App.bot.hears('🙎users', async (ctx) => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
-    let botReply = `${ctx.from.first_name}, 👇`;
-    return await ctx.reply( botReply,
+    if (ctx.from.username !== undefined) {
+        userAlias = `@${ctx.from.username}`;
+    } else {
+        userAlias = `${ctx.from.id}`;
+    } 
+    
+    return await ctx.reply( `${userAlias},👇`,
         {
             reply_markup:{
                 inline_keyboard:[
@@ -14,40 +19,9 @@ App.bot.hears('🙎users', async (ctx) => {
                     [{text:"🏠 NODERED", callback_data: `nodered`},{text:"➖➕ ARDUINO", callback_data: `arduino`}],
                     [{text:"🏡 HOME-ASSISTANT", callback_data: `homeassistant`},{text:"🏘️ OPENHAB", callback_data: `openhab`}],
                     [{text:"🛋️ CANALI TELEGRAM", callback_data: `canali`},{text:"🔍 CERCA", callback_data: `cerca`}], 
-                    [{text:"⛅ METEO", callback_data: `meteo`},{text:"🤹 FUN", callback_data: `fun`}],
-                    
-
-                /*    [{text:"🐈 GITHUB", callback_data: `github`},{text:"🏠 NODERED", callback_data: `nodered`}],           
-                    [{text:"➖➕ ARDUINO", callback_data: `arduino`},{text:"🏡 HOME-ASSISTANT", callback_data: `homeassistant`}],       
-                    [{text:"🏘️ OPENHAB", callback_data: `openhab`},{text:"🔍 CERCA", callback_data: `cerca`}], 
-                    [{text:"⛅ METEO", callback_data: `meteo`}],*/
-
-                    
-                    
-                      
-
-                               
-                    
+                    [{text:"⛅ METEO", callback_data: `meteo`}],              
                 ]         
             },
         
-        })
-        
-        /*.then((result) =>  {setTimeout(() => {
-            
-           App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id,(err, data) => {
-                if (err) throw err;
-                console.log(data);
-                if (result.message_id == undefined){
-                    return;
-                }
-
-              }) 
-               
-        }, 10 * 1000)}) */
-        
-          
-        
-                        
-         
+        })         
 });

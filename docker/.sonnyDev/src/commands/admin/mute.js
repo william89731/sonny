@@ -1,7 +1,5 @@
 
 const App = require('/bot/src/settings/app');
-//const Html = { parse_mode: "html"};
-//const ms = require('ms');
 const ms = require('ms');
 
 App.bot.command(`mute`,  function(msg) {
@@ -15,7 +13,11 @@ App.bot.command(`mute`,  function(msg) {
     fromName = msg.from.first_name;
     testo = msg.update.message ;
     time = testo.text.split(' ')[1];  
-    //var time = match[1];    
+    if (msg.message.reply_to_message.from.username !== undefined) {
+        userAlias = `@${msg.message.reply_to_message.from.username}`;
+    } else {
+        userAlias = `${msg.message.reply_to_message.from.id}`;
+    } 
     noperms = {};
     noperms.can_send_message = false;
     noperms.can_send_media_messages = false;
@@ -29,11 +31,11 @@ App.bot.command(`mute`,  function(msg) {
      App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
         if ((data.status == 'creator') || (data.status == 'administrator')){
             App.bot.telegram.restrictChatMember(chatId, replyId, {until_date: Math.round((Date.now() + ms(time + 'm'))/1000) }, noperms).then(function(result){
-                App.bot.telegram.sendMessage(chatId,replyName + "<em>\nsei stato mutato per</em> " + time + " <em>min</em> 🤐" ,{ parse_mode: "html"});
+                App.bot.telegram.sendMessage(chatId,userAlias + "<em>\nsei stato mutato per</em> " + time + " <em>min</em> 🤐" ,{ parse_mode: "html"});
                // App.bot.deleteMessage(chat.id, messageId);
             }) // restrictChatMember
         } else {
-             App.bot.telegram.sendMessage(chatId,`${fromName}, non sei autorizzato a usare questo comando`);
+             App.bot.telegram.sendMessage(chatId,`${userAlias}, non sei autorizzato a usare questo comando`);
         }
     }) 
    
