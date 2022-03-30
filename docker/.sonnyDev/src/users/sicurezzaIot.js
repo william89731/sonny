@@ -18,8 +18,8 @@ App.bot.action('sicurezzaIOT',async ctx => {
             ]            
             },   
         })
-        .then((result) => { setTimeout(() => {
+     /*   .then((result) => { setTimeout(() => {
             ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
         }, 30 * 1000)})
-        .catch(err => console.log(err))                  
+        .catch(err => console.log(err))  */                
     });

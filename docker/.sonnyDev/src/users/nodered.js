@@ -24,9 +24,9 @@ App.bot.action('nodered',async ctx => {
     
         
         
-       .then((result) => { setTimeout(() => {
+     /*  .then((result) => { setTimeout(() => {
             App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
         }, 30 * 1000)})
-        .catch(err => console.log(err)) 
+        .catch(err => console.log(err)) */
        
 });

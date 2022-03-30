@@ -32,10 +32,10 @@ App.bot.telegram.sendMessage(
         parse_mode: "HTML"
         }
     )
-            .then((result) => { setTimeout(() => {
+         /*   .then((result) => { setTimeout(() => {
                 App.bot.telegram.deleteMessage(chatId, result.message_id)
             }, 30 * 1000)})
-            .catch(err => console.log(err))
+            .catch(err => console.log(err)) */
 
     }, error => {
     console.log("error", error);
@@ -44,10 +44,10 @@ App.bot.telegram.sendMessage(
         `<em>Ooops...la tua ricerca ha restituito un errore</em>`, {
         parse_mode: "HTML"
         })
-        .then((result) => { setTimeout(() => {
+      /*  .then((result) => { setTimeout(() => {
             App.bot.telegram.deleteMessage(chatId, result.message_id)
         }, 10 * 1000)})
-        .catch(err => console.log(err))
+        .catch(err => console.log(err)) */
     });
 }
 
@@ -77,10 +77,10 @@ App.bot.action('oggi', ctx => {
     let botReply = `${ctx.from.first_name}, <em>digitare /oggi e il nome della città</em>`;
     ctx.telegram.sendMessage(chatId ,botReply,{ parse_mode: "html"})
         
-        .then((result) => { setTimeout(() => {
+       /* .then((result) => { setTimeout(() => {
             App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
         }, 10 * 1000)})
-        .catch(err => console.log(err))         
+        .catch(err => console.log(err)) */         
 });
 App.bot.action('domani', ctx => {
     ctx.deleteMessage();
@@ -88,10 +88,10 @@ App.bot.action('domani', ctx => {
     let botReply = `${ctx.from.first_name}, <em>funzione non disponibile</em>`;
     ctx.telegram.sendMessage(chatId ,botReply,{ parse_mode: "html"})
         
-        .then((result) => { setTimeout(() => {
+       /* .then((result) => { setTimeout(() => {
             App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
         }, 10 * 1000)})
-        .catch(err => console.log(err))         
+        .catch(err => console.log(err)) */        
 });
 App.bot.command('oggi', msg => {    
     msg.deleteMessage();
@@ -103,10 +103,10 @@ App.bot.command('oggi', msg => {
     App.bot.telegram.sendMessage(
         chatId,
         `${ctx.from.first_name},digitare nome città`)
-    .then((result) => { setTimeout(() => {
+   /* .then((result) => { setTimeout(() => {
         App.bot.telegram.deleteMessage(chatId, result.message_id)
     }, 10 * 1000)})
-    .catch(err => console.log(err))  
+    .catch(err => console.log(err)) */  
     return;
     }
     getWeather(chatId, city);    

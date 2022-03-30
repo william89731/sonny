@@ -30,7 +30,7 @@ require('/bot/src/users/allerte.js');
 require('/bot/src/users/arduino.js');
 require('/bot/src/users/docker.js');
 require('/bot/src/users/kubernetes.js');
-require('/bot/src/users/channels.js');
+//require('/bot/src/users/channels.js');
 //require('/bot/src/users/fun.js');
 
 
