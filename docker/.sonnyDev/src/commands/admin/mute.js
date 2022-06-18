@@ -13,6 +13,7 @@ App.bot.command(`mute`,  function(msg) {
     fromName = msg.from.first_name;
     testo = msg.update.message ;
     time = testo.text.split(' ')[1];  
+    // TODO call from tools.js 
     if (msg.message.reply_to_message.from.username !== undefined) {
         userAlias = `@${msg.message.reply_to_message.from.username}`;
     } else {

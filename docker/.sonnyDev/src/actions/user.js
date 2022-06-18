@@ -1,13 +1,11 @@
 const App = require('/bot/src/settings/app');
+const tools = require('/bot/src/tools');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
 App.bot.hears('🙎users', async (ctx) => {
     ctx.deleteMessage();
     let chatId = ctx.chat.id;
-    if (ctx.from.username !== undefined) {
-        userAlias = `@${ctx.from.username}`;
-    } else {
-        userAlias = `${ctx.from.id}`;
-    } 
+
+    userAlias = tools.getUsernameOrFirstName(ctx);
     
     return await ctx.reply( `${userAlias},👇`,
         {

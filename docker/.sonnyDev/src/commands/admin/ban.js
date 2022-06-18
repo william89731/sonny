@@ -1,4 +1,5 @@
 const App = require('/bot/src/settings/app');
+const tools = require('/bot/src/tools');
 const  { Telegraf, Markup, keyboard, extra } = require('telegraf');
 const ms = require('ms');
 App.bot.command(`ban`, function(msg, match){
@@ -9,11 +10,7 @@ App.bot.command(`ban`, function(msg, match){
     let replyName = msg.message.reply_to_message.from.first_name;
     let fromName = msg.from.first_name;
     let messageId = msg.message.message_id;
-    if (msg.from.username !== undefined) {
-        userAlias = `@${msg.from.username}`;
-    } else {
-        userAlias = `${msg.from.id}`;
-    } 
+    userAlias = tools.getUsernameOrId(msg);
     if (msg.message.reply_to_message == undefined){
         return;
     }
