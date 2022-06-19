@@ -13,4 +13,12 @@ module.exports = {
       return `${msg_or_ctx.from.id}`;
     } 
   },
+  isAdmin: function (chatMember) {
+    if ((chatMember.status == 'creator') || (chatMember.status == 'administrator')){
+      return true;
+    }
+    else{
+      return false;
+    }
+  },
 } 

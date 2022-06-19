@@ -1,4 +1,5 @@
 const App = require('/bot/src/settings/app');
+const Message = require('/bot/src/Message');
 const tools = require('/bot/src/tools');
 const fs = require('fs');
 const ms = require('ms');
@@ -30,29 +31,25 @@ App.bot.on('message', (msg,) => {
     for ( let word of words2) {
       if ( WORDS.indexOf(word) > -1 ) {        
         console.log( word, 'has been found in the message!');
-        chatId = msg.chat.id;
-        messageId = msg.message_id;
-        fromId = msg.from.id;
-        fromName = msg.from.first_name;
-        testo = msg.update.message ; 
+        var msg_info = new Message(msg);
 
         userAlias = tools.getUsernameOrId(msg);
 
-        App.bot.telegram.getChatMember(chatId,fromId).then(function(result){
+        App.bot.telegram.getChatMember(msg_info.chatId,msg_info.fromId).then(function(result){
 
-          console.log(`l'utente da ammonire ha id: ${fromId}`);
+          console.log(`l'utente da ammonire ha id: ${msg_info.fromId}`);
           con.connect(function(err) {
             if (err) throw err;
-            con.query(`SELECT COUNT(*) as strike FROM membri WHERE  user_id = ${fromId}`, function(err,result) {
+            con.query(`SELECT COUNT(*) as strike FROM membri WHERE  user_id = ${msg_info.fromId}`, function(err,result) {
               if (err) throw err;
               console.log(`${result[0].strike}`);
               if (`${result[0].strike}` === "0" ) {
                 console.log (`user not found!`);
-                con.query(`INSERT INTO membri ( user_id, user_name, strike ) VALUES ('${fromId}','${fromName}', 1 )`, function(err,result) {
+                con.query(`INSERT INTO membri ( user_id, user_name, strike ) VALUES ('${msg_info.fromId}','${msg_info.fromName}', 1 )`, function(err,result) {
                   if (err) throw err;
                   console.log (`utente inserito nella lista`);
                 }); 
-                con.query(`SELECT strike FROM membri WHERE  user_id='${fromId}'`, function(err,result) {
+                con.query(`SELECT strike FROM membri WHERE  user_id='${msg_info.fromId}'`, function(err,result) {
                   if (err) throw err;
                   console.log(`${result[0].strike}`);
                   msg.reply(`
@@ -65,11 +62,11 @@ App.bot.on('message', (msg,) => {
               }
               else { 
                 console.log (`user found!`);
-                con.query(`UPDATE membri SET strike=strike+1 WHERE user_id='${fromId}'`, function(err,result) {
+                con.query(`UPDATE membri SET strike=strike+1 WHERE user_id='${msg_info.fromId}'`, function(err,result) {
                   if (err) throw err;
                   console.log (`strike aggiornato`);
                 });
-                con.query(`SELECT strike FROM membri WHERE  user_id='${fromId}'`, function(err,result) {
+                con.query(`SELECT strike FROM membri WHERE  user_id='${msg_info.fromId}'`, function(err,result) {
                   if (err) throw err;
                   console.log(`${result[0].strike}`);
                   if (`${result[0].strike}` > "2"){
@@ -78,14 +75,14 @@ App.bot.on('message', (msg,) => {
                     noperms.can_send_media_messages = false;
                     noperms.can_send_other_messages = false;
                     noperms.can_can_add_web_page_previews = false;
-                    App.bot.telegram.restrictChatMember(chatId, fromId, {until_date: Math.round((Date.now() + ms(1 + 'm'))/1000) }, noperms).then(function(result){
+                    App.bot.telegram.restrictChatMember(msg_info.chatId, msg_info.fromId, {until_date: Math.round((Date.now() + ms(1 + 'm'))/1000) }, noperms).then(function(result){
                       msg.reply(`
                         ${userAlias}, 
                         \n<em>Sei arrivato al terzo strike!</em> 
                         \n<em>Sei stato mutato per 1 min 🤐</em> `,{ parse_mode: "html"});
 
                     }) 
-                    con.query(`DELETE FROM membri  WHERE  user_id = ${fromId}`, function(err,result) {
+                    con.query(`DELETE FROM membri  WHERE  user_id = ${msg_info.fromId}`, function(err,result) {
                       if (err) throw err;
                       console.log(`utente  tolto dalla lista`);
                     });   
