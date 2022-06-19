@@ -8,15 +8,15 @@ App.bot.command(`unban`, function(msg){
     let replyName = msg.message.reply_to_message.from.first_name;
     let fromName = msg.from.first_name;
     let messageId = msg.message.message_id;
-   if(msg.message.reply_to_message == undefined){
-   return;
-   }
-  
-  App.bot.telegram.getChatMember(chatId, userId).then(function(data){
-       if((data.status == 'creator') || (data.status == 'administrator')){
+    if(msg.message.reply_to_message == undefined){
+        return;
+    }
+
+    App.bot.telegram.getChatMember(chatId, userId).then(function(data){
+        if((data.status == 'creator') || (data.status == 'administrator')){
             App.bot.telegram.unbanChatMember(chatId, replyId).then(function(result){
-            //    bot.telegram.deleteMessage(chatId, messageId);
-               App.bot.telegram.sendMessage(chatId, `${replyName} <em>e' stao sbannato dal gruppo</em>`,{ parse_mode: "html"});
+                //    bot.telegram.deleteMessage(chatId, messageId);
+                App.bot.telegram.sendMessage(chatId, `${replyName} <em>e' stao sbannato dal gruppo</em>`,{ parse_mode: "html"});
             })
         }
         else {

@@ -15,26 +15,26 @@ App.bot.command(`unstrike`,  function(msg) {
   fromName = msg.from.first_name;
   testo = msg.update.message ;
   App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
-            if ((data.status == 'creator') || (data.status == 'administrator')){
-                console.log(`l'utente e' un ${data.status}` );
-                App.bot.telegram.getChatMember(chatId, replyId).then(function(result){
-                console.log(`l'utente da togliere ha id:'${replyId}'`);
-                let con = mysql.createConnection({
-                connectionLimit: 10,
-                host: process.env.MYSQL_HOST ,
-                user: process.env.MYSQL_USER ,
-                password: process.env.MYSQL_ROOT_PASSWORD ,
-                database: process.env.MYSQL_DATABASE ,
-                });
-                con.connect(function(err) {
-                    if (err) throw err;
-                    con.query(`DELETE FROM membri  WHERE  user_id = ${replyId}`, function(err,result) {
-                    if (err) throw err;
-                    console.log(`utente tolto dalla lista`);
-                        msg.reply(`${replyName}, <em>\nsei stato tolto dalla lista ☺️</em>`,{ parse_mode: "html"});
-                    });   
-                }) // 
-            })
-        }
-    }) 
+    if ((data.status == 'creator') || (data.status == 'administrator')){
+      console.log(`l'utente e' un ${data.status}` );
+      App.bot.telegram.getChatMember(chatId, replyId).then(function(result){
+        console.log(`l'utente da togliere ha id:'${replyId}'`);
+        let con = mysql.createConnection({
+          connectionLimit: 10,
+          host: process.env.MYSQL_HOST ,
+          user: process.env.MYSQL_USER ,
+          password: process.env.MYSQL_ROOT_PASSWORD ,
+          database: process.env.MYSQL_DATABASE ,
+        });
+        con.connect(function(err) {
+          if (err) throw err;
+          con.query(`DELETE FROM membri  WHERE  user_id = ${replyId}`, function(err,result) {
+            if (err) throw err;
+            console.log(`utente tolto dalla lista`);
+            msg.reply(`${replyName}, <em>\nsei stato tolto dalla lista ☺️</em>`,{ parse_mode: "html"});
+          });   
+        }) // 
+      })
+    }
+  }) 
 }); 

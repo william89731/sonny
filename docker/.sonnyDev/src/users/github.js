@@ -18,14 +18,14 @@ App.bot.action('github', ctx => {
                     [{text:"Wemos d1 mini led rgb", url:"https://github.com/M4M0M3N/ps3_led"}],
                     [{text:"nik-servo", url:"https://github.com/nikisalli/nik-servo"}],
 
-                               
-                    
+
+
                 ]         
             },
-        
+
         })
-     /*   .then((result) => { setTimeout(() => {
-            App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 30 * 1000)})
+    /*   .then((result) => { setTimeout(() => {
+        App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
+    }, 30 * 1000)})
         .catch(err => console.log(err)) */         
 });

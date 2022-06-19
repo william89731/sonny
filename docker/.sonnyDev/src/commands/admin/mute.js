@@ -24,20 +24,20 @@ App.bot.command(`mute`,  function(msg) {
     noperms.can_send_media_messages = false;
     noperms.can_send_other_messages = false;
     noperms.can_can_add_web_page_previews = false;
-    
+
     if (msg.message.reply_to_message == undefined){
         return;
     }
-    
-     App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
+
+    App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
         if ((data.status == 'creator') || (data.status == 'administrator')){
             App.bot.telegram.restrictChatMember(chatId, replyId, {until_date: Math.round((Date.now() + ms(time + 'm'))/1000) }, noperms).then(function(result){
                 App.bot.telegram.sendMessage(chatId,userAlias + "<em>\nsei stato mutato per</em> " + time + " <em>min</em> 🤐" ,{ parse_mode: "html"});
-               // App.bot.deleteMessage(chat.id, messageId);
+                // App.bot.deleteMessage(chat.id, messageId);
             }) // restrictChatMember
         } else {
-             App.bot.telegram.sendMessage(chatId,`${userAlias}, non sei autorizzato a usare questo comando`);
+            App.bot.telegram.sendMessage(chatId,`${userAlias}, non sei autorizzato a usare questo comando`);
         }
     }) 
-   
+
 });

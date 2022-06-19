@@ -56,10 +56,10 @@ App.bot.on('message', (msg,) => {
                   if (err) throw err;
                   console.log(`${result[0].strike}`);
                   msg.reply(`
-                         ${userAlias} ❌ ⚾ strike! 
-                        \n<em>motivo: uso di un termine presente in blacklist</em> 
-                        \n<em>cancella o modifica il messaggio!</em> 
-                        \n${result[0].strike}/3 <em>strike</em> `,{ parse_mode: "html"});
+                    ${userAlias} ❌ ⚾ strike! 
+                    \n<em>motivo: uso di un termine presente in blacklist</em> 
+                    \n<em>cancella o modifica il messaggio!</em> 
+                    \n${result[0].strike}/3 <em>strike</em> `,{ parse_mode: "html"});
                 }); 
 
               }
@@ -80,9 +80,9 @@ App.bot.on('message', (msg,) => {
                     noperms.can_can_add_web_page_previews = false;
                     App.bot.telegram.restrictChatMember(chatId, fromId, {until_date: Math.round((Date.now() + ms(1 + 'm'))/1000) }, noperms).then(function(result){
                       msg.reply(`
-                            ${userAlias}, 
-                            \n<em>Sei arrivato al terzo strike!</em> 
-                            \n<em>Sei stato mutato per 1 min 🤐</em> `,{ parse_mode: "html"});
+                        ${userAlias}, 
+                        \n<em>Sei arrivato al terzo strike!</em> 
+                        \n<em>Sei stato mutato per 1 min 🤐</em> `,{ parse_mode: "html"});
 
                     }) 
                     con.query(`DELETE FROM membri  WHERE  user_id = ${fromId}`, function(err,result) {
@@ -92,10 +92,10 @@ App.bot.on('message', (msg,) => {
                   }
                   else{
                     msg.reply(`
-                          ${userAlias} ❌ ⚾ strike! 
-                          \n<em>motivo: uso di un termine presente in blacklist</em> 
-                          \n<em>cancella o modifica il messaggio!</em> 
-                          \n${result[0].strike}/3 <em>strike</em>`,{ parse_mode: "html"});  
+                      ${userAlias} ❌ ⚾ strike! 
+                      \n<em>motivo: uso di un termine presente in blacklist</em> 
+                      \n<em>cancella o modifica il messaggio!</em> 
+                      \n${result[0].strike}/3 <em>strike</em>`,{ parse_mode: "html"});  
                   }  
                 });  
               }
@@ -103,7 +103,7 @@ App.bot.on('message', (msg,) => {
 
           })
         }) /// 
-        break;
+          break;
       }   
     }
   }
@@ -113,8 +113,8 @@ App.bot.on('message', (msg,) => {
     // console.log("leaving catch block");
   }
   // finally {
-  //   console.log("entering and leaving the finally block");
-  // }
+    //   console.log("entering and leaving the finally block");
+    // }
 
   // console.log("leaving try-catch statement");    
 });

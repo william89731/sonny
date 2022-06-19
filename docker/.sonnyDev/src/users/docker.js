@@ -10,13 +10,13 @@ App.bot.action('docker', ctx => {
                 inline_keyboard:[
                     [{text:"docker.com", url:"https://www.docker.com"}],
                     [{text:"docker-compose", url:"https://docs.docker.com/compose"}],
-                       
+
                 ]         
             },
-        
+
         })
-     /*   .then((result) => { setTimeout(() => {
-            App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 30 * 1000)})
+    /*   .then((result) => { setTimeout(() => {
+        App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
+    }, 30 * 1000)})
         .catch(err => console.log(err)) */         
 });

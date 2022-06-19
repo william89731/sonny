@@ -16,13 +16,13 @@ App.bot.command(`ban`, function(msg, match){
     }
     App.bot.telegram.getChatMember(chatId, userId).then(function(data){
         if((data.status == 'creator') || (data.status == 'administrator')){
-        App.bot.telegram.kickChatMember(chatId, replyId,{until_date: Math.round((Date.now() + ms('7 days'))/1000)}).then(function(result){
-              //  bot.telegram.deleteMessage(chatId, messageId);
+            App.bot.telegram.kickChatMember(chatId, replyId,{until_date: Math.round((Date.now() + ms('7 days'))/1000)}).then(function(result){
+                //  bot.telegram.deleteMessage(chatId, messageId);
                 App.bot.telegram.sendMessage(chatId,`${userAlias}  <em>e' stato bannato dal gruppo</em>`,{ parse_mode: "html"})
             })
         }
         else {
-        App.bot.telegram.sendMessage(chatId, `_${userAlias}, <em>non sei autorizzato a usare questo comando</em>`,{ parse_mode: "html"})
+            App.bot.telegram.sendMessage(chatId, `_${userAlias}, <em>non sei autorizzato a usare questo comando</em>`,{ parse_mode: "html"})
         }
     })
 });

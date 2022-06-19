@@ -17,13 +17,13 @@ App.bot.command(`strike`,  function(msg) {
   testo = msg.update.message ;
   if (msg.message.reply_to_message.from.username !== undefined) {
     userAlias = `@${msg.message.reply_to_message.from.username}`;
-} else {
+  } else {
     userAlias = `${msg.message.reply_to_message.from.id}`;
-} 
+  } 
   App.bot.telegram.getChatMember(chatId, fromId).then(function(data){
     if ((data.status == 'creator') || (data.status == 'administrator')){
-        console.log(`l'utente e' un ${data.status}` );
-        App.bot.telegram.getChatMember(chatId, replyId).then(function(result){
+      console.log(`l'utente e' un ${data.status}` );
+      App.bot.telegram.getChatMember(chatId, replyId).then(function(result){
         console.log(`l'utente da ammonire ha id: ${replyId}`);
         let con = mysql.createConnection({
           connectionLimit: 10,
@@ -31,12 +31,12 @@ App.bot.command(`strike`,  function(msg) {
           user: process.env.MYSQL_USER  ,
           password: process.env.MYSQL_ROOT_PASSWORD ,
           database: process.env.MYSQL_DATABASE ,
-          });
+        });
         con.connect(function(err) {
+          if (err) throw err;
+          con.query(`SELECT COUNT(*) as strike FROM membri WHERE  user_id = ${replyId}`, function(err,result) {
             if (err) throw err;
-            con.query(`SELECT COUNT(*) as strike FROM membri WHERE  user_id = ${replyId}`, function(err,result) {
-            if (err) throw err;
-              console.log(`${result[0].strike}`);
+            console.log(`${result[0].strike}`);
             if (`${result[0].strike}` === "0" ) {
               console.log (`user not found!`);
               con.query(`INSERT INTO membri ( user_id, user_name, strike ) VALUES ('${replyId}','${replyName}', 1 )`, function(err,result) {
@@ -67,11 +67,11 @@ App.bot.command(`strike`,  function(msg) {
                   noperms.can_can_add_web_page_previews = false;
                   App.bot.telegram.restrictChatMember(chatId, replyId, {until_date: Math.round((Date.now() + ms(1 + 'm'))/1000) }, noperms).then(function(result){
                     msg.reply(`❌ ⚾ \n${userAlias}, <em>Sei arrivato al terzo strike!</em> \n<em>Sei stato mutato per 1 min 🤐</em> `,{ parse_mode: "html"});
-                   // App.bot.deleteMessage(chat.id, messageId);
-                }) // restrictChatMember
-                con.query(`DELETE FROM membri  WHERE  user_id = ${replyId}`, function(err,result) {
-                  if (err) throw err;
-                  console.log(`utente  tolto dalla lista`);
+                    // App.bot.deleteMessage(chat.id, messageId);
+                  }) // restrictChatMember
+                  con.query(`DELETE FROM membri  WHERE  user_id = ${replyId}`, function(err,result) {
+                    if (err) throw err;
+                    console.log(`utente  tolto dalla lista`);
                   });   
                 }
                 else{
@@ -80,7 +80,7 @@ App.bot.command(`strike`,  function(msg) {
               });  
             }
           })
-            
+
         })
       }) ///
     }//creator or admin

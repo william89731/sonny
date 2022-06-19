@@ -6,7 +6,7 @@ App.bot.hears('🙎users', async (ctx) => {
     let chatId = ctx.chat.id;
 
     userAlias = tools.getUsernameOrFirstName(ctx);
-    
+
     return await ctx.reply( `${userAlias},👇`,
         {
             reply_markup:{
@@ -17,9 +17,9 @@ App.bot.hears('🙎users', async (ctx) => {
                     [{text:"🏠 NODERED", callback_data: `nodered`},{text:"➖➕ ARDUINO", callback_data: `arduino`}],
                     [{text:"🏡 HOME-ASSISTANT", callback_data: `homeassistant`},{text:"🏘️ OPENHAB", callback_data: `openhab`}],
                     [{text:"🔍 CERCA", callback_data: `cerca`},{text:"⛅ METEO", callback_data: `meteo`}], 
-                                  
+
                 ]         
             },
-        
+
         })     
 });
