@@ -14,12 +14,12 @@ App.bot.action('sicurezzaIOT',async ctx => {
                     [{text:"scan log4shell", url: "https://github.com/anchore/grype"}],
                     [{text:"IPS", url: "https://crowdsec.net/"}],
                     [{text:"NETDATA", url: "https://www.netdata.cloud/"}],
-    
-            ]            
+
+                ]            
             },   
         })
-     /*   .then((result) => { setTimeout(() => {
-            ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 30 * 1000)})
+    /*   .then((result) => { setTimeout(() => {
+        ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
+    }, 30 * 1000)})
         .catch(err => console.log(err))  */                
-    });
+});

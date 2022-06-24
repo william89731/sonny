@@ -9,15 +9,15 @@ App.bot.action('arduino', ctx => {
             reply_markup:{
                 inline_keyboard:[
                     [{text:"arduino.cc", url:"https://www.arduino.cc/"}],
-                    
-                             
-                    
+
+
+
                 ]         
             },
-        
+
         })
     /*   .then((result) => { setTimeout(() => {
-            App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 30 * 1000)})
+        App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
+    }, 30 * 1000)})
         .catch(err => console.log(err)) */        
 });

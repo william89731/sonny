@@ -13,10 +13,10 @@ App.bot.action('kubernetes', ctx => {
                     [{text:"k3s.io", url:"https://k3s.io/"}],                 
                 ]         
             },
-        
+
         })
-     /*   .then((result) => { setTimeout(() => {
-            App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 30 * 1000)})
+    /*   .then((result) => { setTimeout(() => {
+        App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
+    }, 30 * 1000)})
         .catch(err => console.log(err)) */         
 });

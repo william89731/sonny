@@ -9,12 +9,12 @@ App.bot.action('canali', ctx => {
             reply_markup:{
                 inline_keyboard:[
                     [{text:"Robe che fa nik", url:"http://t.me/robedinik"}],
-                    
-                             
-                    
+
+
+
                 ]         
             },
-        
+
         })
         .then((result) => { setTimeout(() => {
             App.bot.telegram.deleteMessage(ctx.chat.id, result.message_id)
