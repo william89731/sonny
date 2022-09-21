@@ -1,0 +1,62 @@
+networks:
+     containers:
+         ipam:
+             config:
+                 - subnet: 172.40.0.0/24
+services:
+# #########
+#  MYSQL  #
+# ######### 
+  mysql:
+    container_name: mysql
+   # build: ./database
+    image: mysql:latest
+    env_file: ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      TZ: Europe/Rome
+    volumes:
+      - ./database/db:/var/lib/mysql
+    networks:
+            containers:
+                ipv4_address: 172.40.0.2
+
+    deploy:           
+        restart_policy:
+            condition: always
+        resources:
+            limits:
+                cpus: '0.50'
+                memory: 500M
+###############
+#  SONNY_DEV  #
+###############   
+  sonny_dev:
+    container_name: sonny_dev
+    image: william1608/sonny:latest
+    volumes:
+      - ./:/bot/
+    env_file: ./.env
+    environment:
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_HOST: mysql
+      TZ: Europe/Rome
+  
+    ports:
+       - "5001:5000"
+    depends_on:
+      - mysql 
+    networks:
+            containers:
+                ipv4_address: 172.40.0.3
+
+    deploy:           
+        restart_policy:
+            condition: always
+        resources:
+            limits:
+                cpus: '0.50'
+                memory: 500M
