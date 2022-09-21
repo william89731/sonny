@@ -7,7 +7,7 @@
 # nodejs + docker
 
 
-nodejs app dockerized. enjoy :-)
+nodejs app dockerized. enjoy
 
 # sonny
 
