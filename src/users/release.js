@@ -14,6 +14,9 @@ App.bot.action('release', ctx => {
   let portainer = "https://api.github.com/repos/portainer/portainer/releases/latest"
   let openhab = "https://api.github.com/repos/openhab/openhab-core/tags"
   let nginx = "https://api.github.com/repos/nginx/nginx/tags"
+  let wireguard = "https://api.github.com/repos/linuxserver/docker-wireguard/releases/latest"
+  let Pihole = "https://api.github.com/repos/pi-hole/pi-hole/releases/latest"
+
 
   const requestDocker_compose = axios.get(docker_compose);
   const requestHomeassistant = axios.get(homeassistant);
@@ -24,8 +27,10 @@ App.bot.action('release', ctx => {
   const requestPortainer = axios.get(portainer);
   const requestOpenhab = axios.get(openhab);
   const requestNginx = axios.get(nginx);
+  const requestWireguard = axios.get(wireguard);
+  const requestPihole = axios.get(Pihole);
 
-  axios.all([requestDocker_compose, requestHomeassistant, requestZigbee2mqtt, requestHomeassistantSupervisor, requestMosquitto, requestNodered, requestPortainer, requestOpenhab, requestNginx]).then(axios.spread((...responses) => {
+  axios.all([requestDocker_compose, requestHomeassistant, requestZigbee2mqtt, requestHomeassistantSupervisor, requestMosquitto, requestNodered, requestPortainer, requestOpenhab, requestNginx,requestWireguard,requestPihole]).then(axios.spread((...responses) => {
     const responseDocker_compose = responses[0];
     const responseHomeassistant = responses[1];
     const responseZigbee2mqtt = responses[2];
@@ -35,8 +40,10 @@ App.bot.action('release', ctx => {
     const responsePortainer = responses[6];
     const responseOpenhab = responses[7];
     const responseNginx = responses[8];
+    const responseWireguard = responses[9];
+    const responsePihole = responses[10];
 
-    console.log(responseDocker_compose.data.tag_name, responseHomeassistant.data.tag_name, responseZigbee2mqtt.data.tag_name, responseHomeassistantSupervisor.data.tag_name, responseMosquitto.data[0].name, responseNodered.data.tag_name, responsePortainer.data.tag_name, responseOpenhab.data[0].name, responseNginx.data[0].name);
+    console.log(responseDocker_compose.data.tag_name, responseHomeassistant.data.tag_name, responseZigbee2mqtt.data.tag_name, responseHomeassistantSupervisor.data.tag_name, responseMosquitto.data[0].name, responseNodered.data.tag_name, responsePortainer.data.tag_name, responseOpenhab.data[0].name, responseNginx.data[0].name,responseWireguard.data.tag_name,responsePihole.data.tag_name);
     if (ctx.from.username !== undefined) {
       userAlias = `@${ctx.from.username}`;
     } else {
@@ -47,15 +54,17 @@ App.bot.action('release', ctx => {
       {
         reply_markup: {
           inline_keyboard: [
-            [{ text: `NodeRed_${responseNodered.data.tag_name}`, url: "https://github.com/node-red/node-red" }],
-            [{ text: `HomeAssistant Core_${responseHomeassistant.data.tag_name}`, url: "https://github.com/home-assistant/core" }],
-            [{ text: `HomeAssistant OS_${responseHomeassistantSupervisor.data.tag_name}`, url: "https://github.com/home-assistant/operating-system" }],
-            [{ text: `OpenHab core_${responseOpenhab.data[0].name}`, url: "https://github.com/openhab/openhab-core" }],
-            [{ text: `DockerCompose_${responseDocker_compose.data.tag_name}`, url: "https://github.com/docker/compose" }],
-            [{ text: `Zigbee2mqtt_${responseZigbee2mqtt.data.tag_name}`, url: "https://github.com/Koenkk/zigbee2mqtt" }],
-            [{ text: `Mosquitto_${responseMosquitto.data[0].name}`, url: "https://github.com/eclipse/mosquitto" }],
-            [{ text: `Portainer_${responsePortainer.data.tag_name}`, url: "https://github.com/portainer/portainer" }],
-            [{ text: `Nginx_${responseNginx.data[0].name}`, url: "https://github.com/nginx/nginx" }],
+            [{ text: `NodeRed_${responseNodered.data.tag_name}`, url: "https://github.com/node-red/node-red/releases" }],
+            [{ text: `HA Core_${responseHomeassistant.data.tag_name}`, url: "https://github.com/home-assistant/core/releases" }],
+            [{ text: `HA OS_${responseHomeassistantSupervisor.data.tag_name}`, url: "https://github.com/home-assistant/operating-system/releases" }],
+            [{ text: `OpenHab core_${responseOpenhab.data[0].name}`, url: "https://github.com/openhab/openhab-core/tags" }],
+            [{ text: `DockerCompose_${responseDocker_compose.data.tag_name}`, url: "https://github.com/docker/compose/releases" }],
+            [{ text: `Zigbee2mqtt_${responseZigbee2mqtt.data.tag_name}`, url: "https://github.com/Koenkk/zigbee2mqtt/releases" }],
+            [{ text: `Mosquitto_${responseMosquitto.data[0].name}`, url: "https://github.com/eclipse/mosquitto/tags" }],
+            [{ text: `Portainer_${responsePortainer.data.tag_name}`, url: "https://github.com/portainer/portainer/releases" }],
+            [{ text: `Nginx_${responseNginx.data[0].name}`, url: "https://github.com/nginx/nginx/tags" }],
+            [{ text: `Wireguard_${responseWireguard.data.tag_name}`, url: "https://github.com/linuxserver/docker-wireguard/releases" }],
+            [{ text: `Pihole_${responsePihole.data.tag_name}`, url: "https://github.com/pi-hole/pi-hole/releases" }],
           ]
         },
       }

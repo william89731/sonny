@@ -5,6 +5,9 @@ require('dotenv').config({ path: '/bot/.env' });
 const express = require("express");
 const mysql = require("mysql2");
 const app = express();
+const tools = require('/bot/settings/tools');
+const Message = require('/bot/settings/message');
+
 App.bot.command(`strike`, function (ctx) {
   ctx.deleteMessage();
   console.log("comando strike eseguito");
