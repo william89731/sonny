@@ -10,27 +10,26 @@ try {
             userAlias = `@${ctx.from.username}`;
         } else {
             userAlias = `${ctx.from.id}`;
-        }
-        //ctx.reply(`${userAlias} \n<em>Premi il pulsante "entra" per smutarti.</em>\n<em>In caso di necessità contattare gli amministratori.</em>\n<em>Questo messaggio si autodistruggerà entro 1 min.</em>`,{ parse_mode: "html"});
-        App.bot.telegram.sendMessage(ctx.chat.id, ` 
+        };
+
+        ctx.reply(` 
             ${userAlias} 
-            \nPremi il pulsante "entra" per smutarti 
-            \nIn caso di necessità contattare gli amministratori
-            \nQuesto messaggio si autodistruggerà entro 1 min`,
+            \nPremi il pulsante "entra" entro 20 secondi
+            \nIn caso di necessità contattare gli amministratori`,
             {
                 reply_markup: {
                     inline_keyboard: [
                         [{ text: "✅ENTRA✅", callback_data: `enter` }],
                     ]
                 },
-            })
+            }
+        ).then((result) => {
+            setTimeout(() => {
+                ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
+            }, 20 * 1000)
+        })
+            .catch(err => console.log(err))
 
-            .then((result) => {
-                setTimeout(() => {
-                    ctx.deleteMessage
-                }, 60 * 1000)
-            })
-            .catch(err => console.log(err));
 
         App.bot.action('enter', (ctx) => {
             ctx.deleteMessage();
@@ -50,39 +49,39 @@ try {
                     }
                 );
                 App.bot.action('conferma', (ctx) => {
-                ctx.deleteMessage();
-                if (ctx.from.username == undefined) {
-                    App.bot.telegram.restrictChatMember(chatId, newMember, { "can_send_messages": false, "can_send_media_messages": false, "can_send_other_messages": false, "can_add_web_page_previews": false });
-                    ctx.reply(`${userAlias}  ❗❗
+                    ctx.deleteMessage();
+                    if (ctx.from.username == undefined) {
+                        App.bot.telegram.restrictChatMember(chatId, newMember, { "can_send_messages": false, "can_send_media_messages": false, "can_send_other_messages": false, "can_add_web_page_previews": false });
+                        ctx.reply(`${userAlias}  ❗❗
                         \nSei stato disabilitato all'uso della chat 
                         \nContatta gli amministratori`);
-                } else {
-                    if (ctx.from.username !== undefined) {
-                        NewUserAlias = `@${ctx.from.username}`;
+                    } else {
+                        if (ctx.from.username !== undefined) {
+                            NewUserAlias = `@${ctx.from.username}`;
+                        }
+                        App.bot.telegram.restrictChatMember(chatId, newMember, { "can_send_messages": true, "can_send_media_messages": true, "can_send_other_messages": true, "can_add_web_page_previews": true });
+                        ctx.reply(`Ciao ${NewUserAlias} 😊👋  \nbenvenuto/a nel gruppo dedicato alla domotica.\nSaluta il gruppo e buona permanenza`,
+                            Markup
+                                .keyboard([
+                                    ['🤖sonny', '🙎users', '🥷admin'],
+                                ])
+
+                                .resize()
+                        );
+
+                        setTimeout(() => {
+                            ctx.reply(`${NewUserAlias}`,
+                                {
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "regolamento", url: "https://t.me/regole_domotica_network" }],
+                                        ]
+                                    },
+                                }
+                            )
+                        }, 1 * 1000);
+
                     }
-                    App.bot.telegram.restrictChatMember(chatId, newMember, { "can_send_messages": true, "can_send_media_messages": true, "can_send_other_messages": true, "can_add_web_page_previews": true });
-                    ctx.reply(`Ciao ${NewUserAlias} 😊👋  \nbenvenuto/a nel gruppo dedicato alla domotica.\nSaluta il gruppo e buona permanenza`, 
-                    Markup
-                    .keyboard([ 
-                        ['🤖sonny', '🙎users','🥷admin'],
-                            ])
-                
-                    .resize()
-                    );
-
-                    setTimeout(() => {
-                        ctx.reply(`${NewUserAlias}`,
-                          {
-                            reply_markup: {
-                              inline_keyboard: [
-                                [{ text: "regolamento", url: "https://t.me/regole_domotica_network" }],
-                              ]
-                            },
-                          }
-                        )
-                      }, 1 * 1000);
-
-                }
 
                 });
 
@@ -90,7 +89,7 @@ try {
             }
             else {
                 App.bot.telegram.restrictChatMember(chatId, newMember, { "can_send_messages": true, "can_send_media_messages": true, "can_send_other_messages": true, "can_add_web_page_previews": true });
-                ctx.reply(`Ciao ${userAlias} 😊👋  \nbenvenuto/a nel gruppo dedicato alla domotica.\nSaluta il gruppo e buona permanenza`, 
+                ctx.reply(`Ciao ${userAlias} 😊👋  \nbenvenuto/a nel gruppo dedicato alla domotica.\nSaluta il gruppo e buona permanenza`,
                     Markup
                         .keyboard([
                             ['🤖sonny', '🙎users', '🥷admin'],
@@ -99,15 +98,15 @@ try {
                 );
                 setTimeout(() => {
                     ctx.reply(`${userAlias}`,
-                      {
-                        reply_markup: {
-                          inline_keyboard: [
-                            [{ text: "regolamento", url: "https://t.me/regole_domotica_network" }],
-                          ]
-                        },
-                      }
+                        {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "regolamento", url: "https://t.me/regole_domotica_network" }],
+                                ]
+                            },
+                        }
                     )
-                  }, 1 * 1000);
+                }, 1 * 1000);
             }
         });
     }); //new member
