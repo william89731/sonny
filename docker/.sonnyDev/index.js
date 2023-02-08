@@ -38,11 +38,8 @@ require('/bot/src/users/kubernetes.js');
 
 //COMMANDS ADMIN
 require('/bot/src/commands/admin/mute');
-require('/bot/src/commands/admin/unmute');
 require('/bot/src/commands/admin/ban');
-require('/bot/src/commands/admin/unban');
 require('/bot/src/commands/admin/strike');
-require('/bot/src/commands/admin/unstrike');
 //require('/bot/src/commands/admin/getchat');
 
 

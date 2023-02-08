@@ -4,17 +4,17 @@ App.bot.hears(process.env.CODE, async (ctx) => {
     ctx.deleteMessage();
     console.log("comando tastiera eseguito");
     return await ctx.reply(`ready`,Markup
-    .keyboard([ 
-        ['🤖sonny', '🙎users','🥷admin'],
-               ])
-  
-    .resize()
-    
+        .keyboard([ 
+            ['🤖sonny', '🙎users','🥷admin'],
+        ])
+
+        .resize()
+
     )
 
 
 }) ; 
-       
+
 
 
 

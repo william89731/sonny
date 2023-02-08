@@ -8,11 +8,11 @@ App.bot.action('regolamento', ctx => {
             reply_markup:{
                 inline_keyboard:[
                     [{text:"regolamento", url: "https://t.me/regole_domotica_network"}],            
-             ]            
+                ]            
             },   
         })           
-      /*  .then((result) => { setTimeout(() => {
-            ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
-        }, 30 * 1000)})
+    /*  .then((result) => { setTimeout(() => {
+        ctx.telegram.deleteMessage(ctx.chat.id, result.message_id)
+    }, 30 * 1000)})
         .catch(err => console.log(err)) */       
 });

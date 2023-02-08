@@ -9,7 +9,7 @@ console.log(`sonny avviato`)
 
 App.bot.start(async (ctx) => { 
   return await ctx.reply(`<em>inserire il codice</em>`, { parse_mode: "html"} )
-  
+
 }); 
 
 App.bot.launch();

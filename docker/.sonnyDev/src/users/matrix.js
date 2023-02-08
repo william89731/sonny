@@ -8,9 +8,9 @@ App.bot.hears('😎matrix', ctx => {
         reply_markup: {
             inline_keyboard: [
                 [{
-                        text: "pillola azzurra",
-                        callback_data: 'pillola azzurra'
-                    },
+                    text: "pillola azzurra",
+                    callback_data: 'pillola azzurra'
+                },
                     {
                         text: "pillola rossa",
                         callback_data: 'pillola rossa'
